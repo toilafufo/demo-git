@@ -1,0 +1,156 @@
+/* --- Reset cơ bản --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #ffffff;
+    color: #000;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* --- Mảng nền cong màu xanh --- */
+.bg-shape {
+    position: absolute;
+    top: -15vh; /* Kéo mảng xanh dịch lên trên một chút */
+    left: -15vw; /* Kéo nhẹ sang phải để bao trọn khối chữ */
+    width: 65vw; 
+    height: 65vw; /* Dùng vw cho cả 2 chiều để tạo thành một hình tròn hoàn hảo */
+    background: linear-gradient(135deg, #a8e0aa 0%, #e6f9e6 100%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+/* --- Container bọc nội dung --- */
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+/* --- Header --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    width: 35px;
+    height: auto;
+}
+
+.logo-text {
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+nav ul li a.active {
+    font-weight: 800;
+    color: #000;
+}
+
+/* --- Hero Section (Phần chính) --- */
+.hero {
+    display: flex;
+    align-items: center; /* Giúp chữ và ảnh luôn tự động thẳng hàng ngang với nhau */
+    justify-content: space-between;
+    margin-top: 20px;
+    min-height: 70vh; /* Tạo chiều cao để dễ dàng căn lọt chữ vào hình tròn */
+}
+
+/* Phần chữ bên trái */
+.hero-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Đẩy toàn bộ khung chữ sát sang lề trái */
+    padding-right: 20px;
+    transform: translateY(-5%); /* Mẹo: Đẩy nhẹ cả cụm lên 5% để rơi đúng vào tâm hình tròn xanh */
+}
+
+.hero-text h1 {
+    font-size: 65px;
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: left; /* Chữ căn trái */
+    margin-bottom: 30px;
+}
+
+.hero-text p {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: left; /* Chữ căn trái */
+    max-width: 480px;
+}
+
+/* Phần hình ảnh bên phải */
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-image img {
+    max-width: 90%;
+    height: auto;
+}
+
+/* --- Responsive (Giao diện cho điện thoại/tablet) --- */
+@media (max-width: 992px) {
+    .hero {
+        flex-direction: column;
+        margin-top: 20px;
+        min-height: auto;
+    }
+    .bg-shape {
+        width: 150vw;
+        height: 150vw;
+        top: -30%;
+        left: -25%;
+    }
+    .hero-text {
+        padding-right: 0;
+        margin-bottom: 50px;
+        align-items: center; /* Trở lại căn giữa khi xem trên điện thoại */
+        transform: translateY(0);
+    }
+    .hero-text h1, .hero-text p {
+        text-align: center;
+    }
+    .hero-text h1 {
+        font-size: 50px;
+    }
+    header {
+        flex-direction: column;
+        gap: 20px;
+    }
+}

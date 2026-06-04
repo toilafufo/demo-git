@@ -1,0 +1,213 @@
+/* --- Reset & Font (Dùng chung) --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fcfcfc;
+    color: #000;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* --- Mảng nền cong màu xanh --- */
+.bg-shape {
+    position: absolute;
+    top: -10vh;
+    left: -25vw;
+    width: 75vw; 
+    height: 75vw; 
+    background: linear-gradient(135deg, #a8e0aa 0%, #e6f9e6 100%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+/* --- Container & Header --- */
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.logo-icon { width: 35px; height: auto; }
+.logo-text { font-size: 16px; font-weight: 600; color: #333; }
+
+nav ul { list-style: none; display: flex; gap: 40px; }
+nav ul li a { text-decoration: none; color: #333; font-size: 16px; font-weight: 400; }
+nav ul li a.active { font-weight: 800; color: #000; }
+
+/* --- Phần Tracker (Nội dung chính) --- */
+.tracker-section {
+    margin-top: 20px;
+    padding-bottom: 60px;
+}
+
+.greeting {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+/* Khung chứa 3 thẻ (Cards) */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+/* Thiết kế từng thẻ (Card) */
+.card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 40px 20px;
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+    text-align: center;
+    border: 1px solid #f0f0f0;
+}
+
+.card h3 {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+
+/* Nhóm các lựa chọn (Radio buttons) */
+.options-group {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.option input[type="radio"] {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    accent-color: #333;
+}
+
+.option .emoji {
+    font-size: 35px;
+    margin: 5px 0;
+}
+
+/* Ép kích thước cho các ảnh tùy chỉnh (Custom Icons) */
+.option img.custom-icon {
+    width: 40px; 
+    height: 40px; 
+    object-fit: contain; 
+    margin: 10px 0; 
+    display: block;
+}
+
+.option .label-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+}
+
+/* --- Thiết kế thanh trượt (Slider 1 màu) --- */
+.stress-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.slider-container {
+    margin: 30px 0;
+    padding: 0 10px;
+}
+
+.stress-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 10px;
+    outline: none;
+    
+    /* Dải màu: Bên trái màu hồng (#ffb6b6), bên phải màu đen (#222) */
+    background: linear-gradient(to right, #ffb6b6 var(--val, 70%), #222 var(--val, 70%));
+}
+
+/* Cục tròn để kéo trên thanh trượt */
+.stress-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ffffff; /* Nền trắng nổi bật */
+    border: 3px solid #ccc;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.stress-text {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+/* --- Nút Save Today's Log --- */
+.btn-container {
+    text-align: center;
+}
+
+.btn-save {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 18px 50px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-save:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Responsive --- */
+@media (max-width: 992px) {
+    .bg-shape {
+        width: 150vw;
+        height: 150vw;
+        left: -50vw;
+    }
+    header { flex-direction: column; gap: 20px; }
+}

@@ -1,0 +1,203 @@
+/* --- Reset cơ bản & Font --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #ffffff;
+    color: #000;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* --- Mảng nền cong màu xanh (Giống trang chủ) --- */
+.bg-shape {
+    position: absolute;
+    top: -20vh;
+    left: -15vw;
+    width: 65vw; 
+    height: 65vw;
+    background: linear-gradient(135deg, #a8e0aa 0%, #e6f9e6 100%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+/* --- Container & Header --- */
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 50px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    padding: 40px 0;
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 35px;
+    height: auto;
+}
+
+.logo-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* --- Khu vực Đăng nhập --- */
+.login-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 80px; /* Đẩy form lên cao một chút cho cân đối */
+}
+
+/* Thẻ Form Đăng nhập (Card) */
+.login-card {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 450px;
+    padding: 50px 40px;
+    border-radius: 24px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08); /* Hiệu ứng đổ bóng giúp thẻ nổi lên */
+    text-align: center;
+}
+
+.login-card h2 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.login-card .subtitle {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 40px;
+    font-weight: 500;
+}
+
+/* Các ô nhập liệu */
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    border: 2px solid #eaeaea;
+    border-radius: 12px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #a8e0aa; /* Đổi viền sang màu xanh lá khi click vào */
+    background-color: #fcfcfc;
+}
+
+/* Nút Remember me & Forgot Password */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #555;
+    cursor: pointer;
+}
+
+.forgot-pwd {
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.forgot-pwd:hover {
+    text-decoration: underline;
+}
+
+/* Nút Sign In */
+.btn-login {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #8ad38d 0%, #a8e0aa 100%);
+    border: none;
+    border-radius: 12px;
+    color: #000;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(168, 224, 170, 0.4);
+}
+
+/* Link Đăng ký */
+.signup-link {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+}
+
+.signup-link a {
+    color: #000;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+/* --- Responsive cho Điện thoại --- */
+@media (max-width: 768px) {
+    .bg-shape {
+        width: 150vw;
+        height: 150vw;
+        top: -20%;
+        left: -25%;
+    }
+    .container {
+        padding: 0 20px;
+    }
+    .login-card {
+        padding: 40px 20px;
+    }
+}

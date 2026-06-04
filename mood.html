@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Tracker - Pysclinic</title>
+    <link rel="stylesheet" href="mood.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="bg-shape"></div>
+
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo">
+                <img src="ảnh/Picture2.png" alt="Logo" class="logo-icon"> 
+                <span class="logo-text">Pysclinic consultant</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="medical_record.html">Medical record</a></li>
+                    <li><a href="#" class="active">Mood tracker</a></li>
+                    <li><a href="index.html">Sign out</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="tracker-section">
+            <h2 class="greeting">Hey, how are you really doing today?</h2>
+
+            <form action="#" class="tracker-form">
+                <div class="cards-container">
+                    
+                    <div class="card">
+                        <h3>Daily Mood</h3>
+                        <div class="options-group">
+                            <label class="option">
+                                <input type="radio" name="mood" value="angry">
+                                <span class="emoji">😡</span>
+                                <span class="label-text">Angry</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="mood" value="happy" checked>
+                                <span class="emoji">😍</span>
+                                <span class="label-text">Happy</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="mood" value="calm">
+                                <span class="emoji">🙂</span>
+                                <span class="label-text">Calm</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="mood" value="sad">
+                                <span class="emoji">😞</span>
+                                <span class="label-text">Sad</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Energy Level</h3>
+                        <div class="options-group">
+                            <label class="option">
+                                <input type="radio" name="energy" value="full">
+                                <img src="ảnh/nhieu_nl.png" alt="Full" class="custom-icon">
+                                <span class="label-text">Full</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="energy" value="high">
+                                <img src="ảnh/co_nl.png" alt="High" class="custom-icon">
+                                <span class="label-text">High</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="energy" value="mid" checked>
+                                <img src="ảnh/binh_thuong.png" alt="Mid" class="custom-icon">
+                                <span class="label-text">Mid</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="energy" value="low">
+                                <img src="ảnh/it_nl.png" alt="Low" class="custom-icon">
+                                <span class="label-text">Low</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="energy" value="empty">
+                                <img src="ảnh/thieu_nl.png" alt="Empty" class="custom-icon">
+                                <span class="label-text">Empty</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="card stress-card">
+                        <h3>Stress Level</h3>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="10" value="7" class="stress-slider" id="stressSlider" 
+                                   style="--val: 70%;"
+                                   oninput="document.getElementById('stressValue').innerText = this.value; this.style.setProperty('--val', (this.value * 10) + '%');">
+                        </div>
+                        <p class="stress-text">Level: <span id="stressValue">7</span>/10</p>
+                    </div>
+
+                </div> 
+                
+                <div class="btn-container">
+                    <button type="submit" class="btn-save">Save Today's Log</button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+</body>
+</html>
