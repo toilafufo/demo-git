@@ -42,9 +42,10 @@ header {
 }
 
 .logo {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 12px;
+    text-decoration: none;
 }
 
 .logo-icon {
@@ -54,7 +55,7 @@ header {
 
 .logo-text {
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 600;
     color: #333;
 }
 
@@ -76,24 +77,24 @@ nav ul li a.active {
     color: #000;
 }
 
-/* --- Hero Section (Phần chính) --- */
+
 .hero {
     display: flex;
-    align-items: center; /* Giúp chữ và ảnh luôn tự động thẳng hàng ngang với nhau */
+    align-items: center; 
     justify-content: space-between;
     margin-top: 20px;
-    min-height: 70vh; /* Tạo chiều cao để dễ dàng căn lọt chữ vào hình tròn */
+    min-height: 70vh; 
 }
 
-/* Phần chữ bên trái */
+
 .hero-text {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start; /* Đẩy toàn bộ khung chữ sát sang lề trái */
+    align-items: flex-start; 
     padding-right: 20px;
-    transform: translateY(-5%); /* Mẹo: Đẩy nhẹ cả cụm lên 5% để rơi đúng vào tâm hình tròn xanh */
+    transform: translateY(-5%); 
 }
 
 .hero-text h1 {

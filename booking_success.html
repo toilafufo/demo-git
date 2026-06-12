@@ -1,0 +1,111 @@
+    <!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Successful - Pysclinic</title>
+    <link rel="stylesheet" href="booking_success.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="bg-shape"></div>
+
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo">
+                <img src="ảnh/logo.png" alt="Logo" class="logo-icon"> 
+                <span class="logo-text">Pysclinic consultant</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="medical_record.html">Medical record</a></li>
+                    <li><a href="mood.html">Mood tracker</a></li>
+                    <li><a href="login.html">Sign out</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="booking-wrapper">
+            <div class="booking-card">
+                
+                <div class="booking-sidebar">
+                    <h2>Confirmation</h2>
+                    <p class="sidebar-desc">Your appointment has been recorded. Please check the summary details on the right side.</p>
+                    
+                    <div class="step-indicator">
+                        <div class="step-text">
+                            <span>Step 3/3</span>
+                            <span>Completed</span>
+                        </div>
+                        <div class="step-bar"><div class="step-fill" style="width: 100%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="booking-main">
+                    
+                    <div class="success-container">
+                        <div class="success-icon-circle">
+                            <span class="checkmark">✓</span>
+                        </div>
+                        <h2>Booking Successful!</h2>
+                        <p class="success-subtitle">Thank you! Your appointment with the doctor has been successfully scheduled.</p>
+                    </div>
+
+                    <div class="summary-box">
+                        <h3>Appointment Summary</h3>
+                        <div class="summary-item">
+                            <span class="item-label">Date:</span>
+                            <span class="item-value" id="finalDate">Loading...</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="item-label">Time Slot:</span>
+                            <span class="item-value" id="finalTime">Loading...</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="item-label">Service:</span>
+                            <span class="item-value">Psychological Consultation</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="item-label">Status:</span>
+                            <span class="item-value status-confirmed">Confirmed</span>
+                        </div>
+                    </div>
+
+                    <div class="booking-actions">
+                        <a href="index.html" class="btn-primary-home">Return Home</a>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+<script>
+        window.onload = function() {
+            // Lấy dữ liệu từ bộ nhớ của trình duyệt
+            const savedDate = localStorage.getItem('bookingDate');
+            const savedSession = localStorage.getItem('bookingSession');
+            const savedTime = localStorage.getItem('bookingTime');
+
+            // In ngày ra
+            if (savedDate) {
+                document.getElementById('finalDate').innerText = savedDate;
+            } else {
+                document.getElementById('finalDate').innerText = "Not selected";
+            }
+
+            // In giờ ra
+            if (savedSession && savedTime) {
+                // Tách lấy từ đầu tiên của buổi (ví dụ: lấy chữ "Morning" từ "Morning (08:00 - 12:00)")
+                let shortSession = savedSession.split(' ')[0]; 
+                document.getElementById('finalTime').innerText = `${savedTime} (${shortSession})`;
+            } else {
+                document.getElementById('finalTime').innerText = "Not selected";
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+/* --- Reset & Font --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fcfcfc;
+    color: #000;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* --- Mảng nền cong màu xanh --- */
+.bg-shape {
+    position: absolute;
+    top: -15vh;
+    left: -20vw;
+    width: 70vw; 
+    height: 70vw; 
+    background: linear-gradient(135deg, #a8e0aa 0%, #e6f9e6 100%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+/* --- Container & Header --- */
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.logo-icon { width: 48px; height: auto; display: block; }
+.logo-text { font-size: 18px; font-weight: 700; color: #222; letter-spacing: -0.2px; }
+
+nav ul { list-style: none; display: flex; gap: 40px; }
+nav ul li a { text-decoration: none; color: #333; font-size: 16px; font-weight: 400; }
+nav ul li a.active { font-weight: 800; color: #000; }
+
+/* --- Giao diện Đặt lịch (Split Layout) --- */
+.booking-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0 60px 0;
+}
+
+.booking-card {
+    display: flex;
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 1000px;
+    border-radius: 24px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+    overflow: hidden; /* Cắt phần background bị tràn ra ngoài góc bo tròn */
+    min-height: 550px;
+}
+
+/* --- Cột Trái (Sidebar) --- */
+.booking-sidebar {
+    flex: 0 0 320px;
+    background: linear-gradient(135deg, #a8e0aa 0%, #8ad38d 100%); /* Màu xanh thương hiệu */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    color: #000;
+}
+
+.back-link {
+    text-decoration: none;
+    color: #000;
+    font-weight: 700;
+    margin-bottom: 40px;
+    display: inline-block;
+}
+
+.booking-sidebar h2 {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.sidebar-desc {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.5;
+    flex: 1; /* Đẩy thanh tiến độ xuống dưới cùng */
+}
+
+/* Thanh Tiến Độ trong Sidebar */
+.step-indicator {
+    margin-top: auto;
+}
+
+.step-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.step-bar {
+    width: 100%;
+    height: 6px;
+    background-color: rgba(255,255,255,0.4);
+    border-radius: 10px;
+}
+
+.step-fill {
+    width: 33%; /* Step 1/3 */
+    height: 100%;
+    background-color: #000;
+    border-radius: 10px;
+}
+
+/* --- Cột Phải (Main Calendar) --- */
+.booking-main {
+    flex: 1;
+    padding: 40px 50px;
+    background-color: #fafafa;
+}
+
+.booking-main h2 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.booking-main .subtitle {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+/* Bố cục 2 tháng cạnh nhau */
+.calendars-container {
+    display: flex;
+    gap: 40px;
+}
+
+.month-block {
+    flex: 1;
+}
+
+.month-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.month-title {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.next-month-btn {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Lưới Lịch (Grid) */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px 5px;
+    text-align: center;
+}
+
+.weekday {
+    font-size: 13px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.day {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.day.empty {
+    cursor: default;
+}
+
+/* Ngày đã qua (Gạch bỏ như IDP) */
+.day.disabled {
+    color: #ccc;
+    text-decoration: line-through;
+    pointer-events: none;
+}
+
+/* Ngày có thể chọn */
+.day.selectable:hover {
+    background-color: #eaeaea;
+}
+
+/* Ngày đang được chọn */
+.day.selected {
+    background-color: #333; /* Ô chọn màu đen nổi bật */
+    color: #fff;
+    font-weight: 700;
+}
+
+/* --- Khung Nút Bấm Cuối Cùng --- */
+.booking-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+    border-top: 1px solid #eaeaea;
+    padding-top: 30px;
+}
+
+.clear-btn {
+    font-size: 14px;
+    color: #555;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #8ad38d 0%, #a8e0aa 100%);
+    color: #000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 14px 40px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(168, 224, 170, 0.4);
+}
+
+/* --- Responsive --- */
+@media (max-width: 992px) {
+    .booking-card {
+        flex-direction: column;
+    }
+    .booking-sidebar {
+        flex: auto;
+    }
+    .calendars-container {
+        flex-direction: column;
+    }
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
