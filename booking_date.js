@@ -1,10 +1,10 @@
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         
-// Lấy ngày giờ hiện tại thực tế trên máy tính
+// Get the actual current date and time
 const today = new Date();
 const todayDateOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
-// Biến lưu trữ "tháng gốc" đang hiển thị trên màn hình (Mặc định là tháng hiện tại)
+// Variable storing the "base month" currently displayed on the screen (Defaults to the current month)
 let currentBaseDate = new Date(today.getFullYear(), today.getMonth(), 1);
 
 function buildCalendars() {
@@ -13,44 +13,44 @@ function buildCalendars() {
     
     container.innerHTML = '';
 
-    // Tháng bên trái
+    // Left month
     const month1 = new Date(currentBaseDate.getFullYear(), currentBaseDate.getMonth(), 1);
-    // Tháng bên phải
+    // Right month
     const month2 = new Date(currentBaseDate.getFullYear(), currentBaseDate.getMonth() + 1, 1);
 
-    // Kiểm tra xem có được phép lùi tháng không (Không lùi quá tháng hiện tại ở ngoài đời thực)
+    // Check if going back a month is allowed (Cannot go back past the actual current month)
     const canGoBack = month1 > new Date(today.getFullYear(), today.getMonth(), 1);
 
-    container.appendChild(createMonthHTML(month1, canGoBack, false)); // Lịch trái có nút Prev (❮)
-    container.appendChild(createMonthHTML(month2, false, true));      // Lịch phải có nút Next (❯)
+    container.appendChild(createMonthHTML(month1, canGoBack, false)); // Left calendar has Prev button (❮)
+    container.appendChild(createMonthHTML(month2, false, true));      // Right calendar has Next button (❯)
 }
 
-// Hàm vẽ từng tháng
+// Function to render each month
 function createMonthHTML(date, hasPrevBtn, hasNextBtn) {
     const year = date.getFullYear();
     const month = date.getMonth();
     
-    // Tính số ngày trong tháng và ngày bắt đầu (thứ mấy)
+    // Calculate the number of days in the month and the starting day index
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const firstDayIndex = new Date(year, month, 1).getDay(); // 0 = Chủ Nhật, 1 = Thứ Hai...
+    const firstDayIndex = new Date(year, month, 1).getDay(); // 0 = Sunday, 1 = Monday...
 
     const monthBlock = document.createElement('div');
     monthBlock.className = 'month-block';
 
-    // Tạo phần Header chứa Tiêu đề và Nút chuyển tháng
+    // Create the Header section containing the Title and Month navigation buttons
     let headerHTML = `<div class="month-header" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">`;
 
     if (hasPrevBtn) {
-        // Nút lùi tháng
+        // Previous month button
         headerHTML += `<button onclick="changeMonth(-1)" style="cursor:pointer; border:1px solid #ddd; background:#fff; border-radius:8px; width:30px; height:30px; font-weight:bold; transition: 0.2s;">❮</button>`;
     } else {
-        headerHTML += `<div style="width: 30px;"></div>`; // Khoảng trống tàng hình để cân bằng bố cục
+        headerHTML += `<div style="width: 30px;"></div>`; // Invisible spacer to balance the layout
     }
 
     headerHTML += `<h3 class="month-title" style="margin: 0; text-align: center; flex: 1;">${monthNames[month]} ${year}</h3>`;
 
     if (hasNextBtn) {
-        // Nút tiến tháng
+        // Next month button
         headerHTML += `<button onclick="changeMonth(1)" style="cursor:pointer; border:1px solid #ddd; background:#fff; border-radius:8px; width:30px; height:30px; font-weight:bold; transition: 0.2s;">❯</button>`;
     } else {
         headerHTML += `<div style="width: 30px;"></div>`;
@@ -58,21 +58,21 @@ function createMonthHTML(date, hasPrevBtn, hasNextBtn) {
 
     headerHTML += `</div>`;
 
-    // Bắt đầu tạo khung lưới lịch
+    // Start creating the calendar grid
     let gridHTML = `<div class="calendar-grid">
         <div class="weekday">S</div><div class="weekday">M</div><div class="weekday">T</div>
         <div class="weekday">W</div><div class="weekday">T</div><div class="weekday">F</div><div class="weekday">S</div>`;
 
-    // 1. Chèn các ô trống ở đầu tháng
+    // 1. Insert empty cells at the beginning of the month
     for(let i = 0; i < firstDayIndex; i++) {
         gridHTML += `<div class="day empty"></div>`;
     }
 
-    // 2. Chèn các ngày có thật
+    // 2. Insert the actual days
     for(let d = 1; d <= daysInMonth; d++) {
         const currentIterDate = new Date(year, month, d);
         
-        // So sánh xem ngày đang xét có nằm trong quá khứ không
+        // Check if the current iterated date is in the past
         if (currentIterDate < todayDateOnly) {
             gridHTML += `<div class="day disabled">${d}</div>`;
         } else {
@@ -86,34 +86,34 @@ function createMonthHTML(date, hasPrevBtn, hasNextBtn) {
     return monthBlock;
 }
 
-// --- HÀM MỚI: Xử lý khi bấm nút chuyển tháng ---
+// --- NEW FUNCTION: Handle month change button click ---
 function changeMonth(offset) {
-    // Cộng hoặc trừ tháng hiện hành đi 1
+    // Add or subtract 1 from the current base month
     currentBaseDate.setMonth(currentBaseDate.getMonth() + offset);
-    // Vẽ lại lịch
+    // Redraw the calendars
     buildCalendars();
 }
 
-// Hàm xử lý hiệu ứng khi click vào ngày
+// Function to handle the visual effect when clicking on a date
 function selectDate(element, dateString) {
     document.querySelectorAll('.day').forEach(el => el.classList.remove('selected'));
     element.classList.add('selected');
     document.getElementById('displayDate').innerText = dateString;
     
-    // THÊM DÒNG NÀY: Lưu ngày vừa chọn vào bộ nhớ tạm của trình duyệt
+    // ADD THIS LINE: Save the selected date to the browser's local storage
     localStorage.setItem('bookingDate', dateString);
 }
 
-// Nút Xóa lựa chọn
+// Clear selection button
 function clearSelection() {
     document.querySelectorAll('.day').forEach(el => el.classList.remove('selected'));
     document.getElementById('displayDate').innerText = "None";
     
-    // THÊM DÒNG NÀY: Xóa ngày trong bộ nhớ nếu người dùng ấn Clear
+    // ADD THIS LINE: Remove the date from local storage if the user clicks Clear
     localStorage.removeItem('bookingDate');
 }
 
-// Chạy hàm vẽ lịch khi file HTML đã tải xong
+// Run the calendar rendering function when the HTML file has finished loading
 window.onload = function() {
     buildCalendars();
 };

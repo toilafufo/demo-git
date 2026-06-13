@@ -1,4 +1,3 @@
-/* --- Reset & Base (Dùng chung) --- */
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +13,6 @@ body {
     min-height: 100vh;
 }
 
-/* --- Nền xanh --- */
 .bg-shape {
     position: absolute;
     top: -15vh;
@@ -26,7 +24,6 @@ body {
     z-index: -1;
 }
 
-/* --- Container & Header --- */
 .container {
     max-width: 1300px;
     margin: 0 auto;
@@ -62,7 +59,6 @@ nav ul { list-style: none; display: flex; gap: 40px; }
 nav ul li a { text-decoration: none; color: #333; font-size: 16px; font-weight: 400; }
 nav ul li a.active { font-weight: 800; color: #000; }
 
-/* --- Khu vực Card Bài Test --- */
 .quiz-wrapper {
     display: flex;
     justify-content: center;
@@ -94,7 +90,6 @@ nav ul li a.active { font-weight: 800; color: #000; }
     line-height: 1.5;
 }
 
-/* Thanh Tiến Độ */
 .progress-bar {
     width: 100%;
     height: 8px;
@@ -119,7 +114,6 @@ nav ul li a.active { font-weight: 800; color: #000; }
     margin-bottom: 30px;
 }
 
-/* Nội dung Câu hỏi */
 .question-text {
     font-size: 20px;
     font-weight: 700;
@@ -129,7 +123,6 @@ nav ul li a.active { font-weight: 800; color: #000; }
     color: #222;
 }
 
-/* Khung chứa các đáp án */
 .options-container {
     display: flex;
     flex-direction: column;
@@ -137,7 +130,6 @@ nav ul li a.active { font-weight: 800; color: #000; }
     margin-bottom: 30px;
 }
 
-/* Từng ô lựa chọn */
 .option-box {
     display: flex;
     align-items: center;
@@ -159,12 +151,10 @@ nav ul li a.active { font-weight: 800; color: #000; }
     background-color: #f2fbf2;
 }
 
-/* Ẩn radio button mặc định đi */
 .option-box input[type="radio"] {
     display: none; 
 }
 
-/* Cục tròn Radio tự chế để đẹp hơn */
 .custom-radio {
     width: 20px;
     height: 20px;
@@ -172,7 +162,7 @@ nav ul li a.active { font-weight: 800; color: #000; }
     border-radius: 50%;
     margin-right: 15px;
     position: relative;
-    flex-shrink: 0; /* Ngăn nó bị méo nếu chữ quá dài */
+    flex-shrink: 0;
 }
 
 .option-box.selected .custom-radio {
@@ -201,7 +191,6 @@ nav ul li a.active { font-weight: 800; color: #000; }
     color: #000;
 }
 
-/* Nút Next */
 .btn-next {
     width: 100%;
     padding: 16px;
@@ -227,7 +216,6 @@ nav ul li a.active { font-weight: 800; color: #000; }
     cursor: not-allowed;
 }
 
-/* Vòng tròn điểm số khi hoàn thành */
 .score-circle {
     width: 100px;
     height: 100px;
@@ -243,7 +231,6 @@ nav ul li a.active { font-weight: 800; color: #000; }
     box-shadow: 0 10px 20px rgba(168, 224, 170, 0.4);
 }
 
-/* --- Responsive --- */
 @media (max-width: 768px) {
     .bg-shape {
         width: 150vw;

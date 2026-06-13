@@ -85,21 +85,17 @@
     </div>
 <script>
         window.onload = function() {
-            // Lấy dữ liệu từ bộ nhớ của trình duyệt
             const savedDate = localStorage.getItem('bookingDate');
             const savedSession = localStorage.getItem('bookingSession');
             const savedTime = localStorage.getItem('bookingTime');
 
-            // In ngày ra
             if (savedDate) {
                 document.getElementById('finalDate').innerText = savedDate;
             } else {
                 document.getElementById('finalDate').innerText = "Not selected";
             }
 
-            // In giờ ra
             if (savedSession && savedTime) {
-                // Tách lấy từ đầu tiên của buổi (ví dụ: lấy chữ "Morning" từ "Morning (08:00 - 12:00)")
                 let shortSession = savedSession.split(' ')[0]; 
                 document.getElementById('finalTime').innerText = `${savedTime} (${shortSession})`;
             } else {

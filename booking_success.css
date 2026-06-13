@@ -1,4 +1,3 @@
-/* --- Reset & Font --- */
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +13,6 @@ body {
     min-height: 100vh;
 }
 
-/* --- Mảng nền cong màu xanh --- */
 .bg-shape {
     position: absolute;
     top: -15vh;
@@ -26,7 +24,6 @@ body {
     z-index: -1;
 }
 
-/* --- Container & Header --- */
 .container {
     max-width: 1300px;
     margin: 0 auto;
@@ -54,7 +51,6 @@ nav ul { list-style: none; display: flex; gap: 40px; }
 nav ul li a { text-decoration: none; color: #333; font-size: 16px; font-weight: 400; }
 nav ul li a.active { font-weight: 800; color: #000; }
 
-/* --- Giao diện Đặt lịch (Split Layout) --- */
 .booking-wrapper {
     display: flex;
     justify-content: center;
@@ -73,7 +69,6 @@ nav ul li a.active { font-weight: 800; color: #000; }
     min-height: 550px;
 }
 
-/* --- Cột Trái (Sidebar) --- */
 .booking-sidebar {
     flex: 0 0 320px;
     background: linear-gradient(135deg, #a8e0aa 0%, #8ad38d 100%);
@@ -87,7 +82,7 @@ nav ul li a.active { font-weight: 800; color: #000; }
     font-size: 32px;
     font-weight: 900;
     line-height: 1.2;
-    margin-top: 40px; /* Bù đắp khoảng trống do không có nút Back */
+    margin-top: 40px;
     margin-bottom: 20px;
 }
 
@@ -98,7 +93,6 @@ nav ul li a.active { font-weight: 800; color: #000; }
     flex: 1;
 }
 
-/* Thanh Tiến Độ trong Sidebar */
 .step-indicator {
     margin-top: auto;
 }
@@ -124,17 +118,15 @@ nav ul li a.active { font-weight: 800; color: #000; }
     border-radius: 10px;
 }
 
-/* --- Cột Phải (Thông báo thành công) --- */
 .booking-main {
     flex: 1;
     padding: 40px 50px;
     background-color: #fafafa;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Căn giữa toàn bộ nội dung thành công */
+    align-items: center;
 }
 
-/* Khối thông báo thành công */
 .success-container {
     text-align: center;
     margin-bottom: 30px;
@@ -173,7 +165,6 @@ nav ul li a.active { font-weight: 800; color: #000; }
     margin: 0 auto;
 }
 
-/* Hộp Tóm tắt lịch hẹn (Summary Box) */
 .summary-box {
     width: 100%;
     max-width: 500px;
@@ -216,7 +207,7 @@ nav ul li a.active { font-weight: 800; color: #000; }
 }
 
 .item-value.status-confirmed {
-    color: #4caf50; /* Màu xanh lá thông báo Confirmed */
+    color: #4caf50;
     background-color: #e8f5e9;
     padding: 2px 10px;
     border-radius: 20px;
@@ -224,7 +215,6 @@ nav ul li a.active { font-weight: 800; color: #000; }
     text-transform: uppercase;
 }
 
-/* Khung Nút Bấm Quay Về */
 .booking-actions {
     width: 100%;
     max-width: 500px;
@@ -235,7 +225,7 @@ nav ul li a.active { font-weight: 800; color: #000; }
 .btn-primary-home {
     display: block;
     width: 100%;
-    background: #000000; /* Nút màu đen quyền lực tương phản cực đẹp */
+    background: #000000;
     color: #ffffff;
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
@@ -251,7 +241,6 @@ nav ul li a.active { font-weight: 800; color: #000; }
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* --- Responsive --- */
 @media (max-width: 992px) {
     .booking-card { flex-direction: column; }
     .booking-sidebar { flex: auto; }

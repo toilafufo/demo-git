@@ -75,7 +75,6 @@
     </div>
 
     <script>
-        // Các bộ đáp án được định nghĩa riêng biệt
         const yesNoOptions = [
             { text: "Yes", score: 0 }, 
             { text: "No", score: 0 }
@@ -88,11 +87,10 @@
             { text: "Nearly every day", score: 3 }
         ];
 
-        // Mảng chứa toàn bộ 17 câu hỏi 
         const questions = [
             { text: "Have you had a medical check-up before?", options: yesNoOptions, type: "general" },
             
-            // 9 câu PHQ-9 (Depression)
+            // 9 questions PHQ-9 (Depression)
             { text: "Little interest or pleasure in doing things", options: standardOptions, type: "depression" },
             { text: "Feeling down, depressed, or hopeless", options: standardOptions, type: "depression" },
             { text: "Trouble falling or staying asleep, or sleeping too much", options: standardOptions, type: "depression" },
@@ -103,7 +101,7 @@
             { text: "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual", options: standardOptions, type: "depression" },
             { text: "Thoughts that you would be better off dead or of hurting yourself in some way", options: standardOptions, type: "depression" },
             
-            // 7 câu GAD-7 (Anxiety)
+            // 7 questions GAD-7 (Anxiety)
             { text: "Feeling nervous, anxious, or on edge", options: standardOptions, type: "anxiety" },
             { text: "Not being able to stop or control worrying", options: standardOptions, type: "anxiety" },
             { text: "Worrying too much about different things", options: standardOptions, type: "anxiety" },
@@ -126,7 +124,6 @@
         const quizCard = document.getElementById('quizCard');
         const resultCard = document.getElementById('resultCard');
 
-        // Hàm tải câu hỏi lên màn hình
         function loadQuestion() {
             let currentData = questions[currentIndex];
 
@@ -188,7 +185,6 @@
             document.getElementById('depressionScore').innerText = depressionTotal;
             document.getElementById('anxietyScore').innerText = anxietyTotal;
 
-            // Đánh giá Trầm Cảm (PHQ-9) theo chuẩn bảng mới
             let depSeverity = "";
             if(depressionTotal <= 4) depSeverity = "Normal (No depression)";
             else if(depressionTotal <= 9) depSeverity = "Minimal / Mild depression";
@@ -197,7 +193,6 @@
             else depSeverity = "Severe depression";
             document.getElementById('depressionSeverity').innerText = depSeverity;
 
-            // Đánh giá Lo Âu (GAD-7) theo chuẩn bảng mới
             let anxSeverity = "";
             if(anxietyTotal <= 4) anxSeverity = "Minimal anxiety";
             else if(anxietyTotal <= 9) anxSeverity = "Mild anxiety";
@@ -206,7 +201,6 @@
             document.getElementById('anxietySeverity').innerText = anxSeverity;
         }
 
-        // Khởi động bài test khi load trang
         loadQuestion();
     </script>
 </body>

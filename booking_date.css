@@ -1,4 +1,4 @@
-/* --- Reset & Font --- */
+
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +14,6 @@ body {
     min-height: 100vh;
 }
 
-/* --- Mảng nền cong màu xanh --- */
 .bg-shape {
     position: absolute;
     top: -15vh;
@@ -26,7 +25,6 @@ body {
     z-index: -1;
 }
 
-/* --- Container & Header --- */
 .container {
     max-width: 1300px;
     margin: 0 auto;
@@ -54,7 +52,6 @@ nav ul { list-style: none; display: flex; gap: 40px; }
 nav ul li a { text-decoration: none; color: #333; font-size: 16px; font-weight: 400; }
 nav ul li a.active { font-weight: 800; color: #000; }
 
-/* --- Giao diện Đặt lịch (Split Layout) --- */
 .booking-wrapper {
     display: flex;
     justify-content: center;
@@ -69,14 +66,13 @@ nav ul li a.active { font-weight: 800; color: #000; }
     max-width: 1000px;
     border-radius: 24px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
-    overflow: hidden; /* Cắt phần background bị tràn ra ngoài góc bo tròn */
+    overflow: hidden; 
     min-height: 550px;
 }
 
-/* --- Cột Trái (Sidebar) --- */
 .booking-sidebar {
     flex: 0 0 320px;
-    background: linear-gradient(135deg, #a8e0aa 0%, #8ad38d 100%); /* Màu xanh thương hiệu */
+    background: linear-gradient(135deg, #a8e0aa 0%, #8ad38d 100%); 
     padding: 40px;
     display: flex;
     flex-direction: column;
@@ -102,10 +98,9 @@ nav ul li a.active { font-weight: 800; color: #000; }
     font-size: 15px;
     font-weight: 500;
     line-height: 1.5;
-    flex: 1; /* Đẩy thanh tiến độ xuống dưới cùng */
+    flex: 1; 
 }
 
-/* Thanh Tiến Độ trong Sidebar */
 .step-indicator {
     margin-top: auto;
 }
@@ -126,13 +121,12 @@ nav ul li a.active { font-weight: 800; color: #000; }
 }
 
 .step-fill {
-    width: 33%; /* Step 1/3 */
+    width: 33%; 
     height: 100%;
     background-color: #000;
     border-radius: 10px;
 }
 
-/* --- Cột Phải (Main Calendar) --- */
 .booking-main {
     flex: 1;
     padding: 40px 50px;
@@ -151,7 +145,6 @@ nav ul li a.active { font-weight: 800; color: #000; }
     margin-bottom: 40px;
 }
 
-/* Bố cục 2 tháng cạnh nhau */
 .calendars-container {
     display: flex;
     gap: 40px;
@@ -185,7 +178,6 @@ nav ul li a.active { font-weight: 800; color: #000; }
     font-weight: bold;
 }
 
-/* Lưới Lịch (Grid) */
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -213,26 +205,22 @@ nav ul li a.active { font-weight: 800; color: #000; }
     cursor: default;
 }
 
-/* Ngày đã qua (Gạch bỏ như IDP) */
 .day.disabled {
     color: #ccc;
     text-decoration: line-through;
     pointer-events: none;
 }
 
-/* Ngày có thể chọn */
 .day.selectable:hover {
     background-color: #eaeaea;
 }
 
-/* Ngày đang được chọn */
 .day.selected {
-    background-color: #333; /* Ô chọn màu đen nổi bật */
+    background-color: #333; 
     color: #fff;
     font-weight: 700;
 }
 
-/* --- Khung Nút Bấm Cuối Cùng --- */
 .booking-actions {
     display: flex;
     justify-content: space-between;
@@ -268,7 +256,6 @@ nav ul li a.active { font-weight: 800; color: #000; }
     box-shadow: 0 10px 20px rgba(168, 224, 170, 0.4);
 }
 
-/* --- Responsive --- */
 @media (max-width: 992px) {
     .booking-card {
         flex-direction: column;
