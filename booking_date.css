@@ -45,8 +45,16 @@ header {
     text-decoration: none;
 }
 
-.logo-icon { width: 48px; height: auto; display: block; }
-.logo-text { font-size: 18px; font-weight: 700; color: #222; letter-spacing: -0.2px; }
+.logo-icon {
+    width: 35px;
+    height: auto;
+}
+
+.logo-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
 
 nav ul { list-style: none; display: flex; gap: 40px; }
 nav ul li a { text-decoration: none; color: #333; font-size: 16px; font-weight: 400; }

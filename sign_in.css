@@ -40,7 +40,7 @@ header {
 .logo {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     text-decoration: none;
 }
 
@@ -54,7 +54,6 @@ header {
     font-weight: 600;
     color: #333;
 }
-
 .login-wrapper {
     flex: 1;
     display: flex;
@@ -66,10 +65,10 @@ header {
 .login-card {
     background-color: #ffffff;
     width: 100%;
-    max-width: 450px;
+    max-width: 480px; 
     padding: 50px 40px;
-    border-radius: 24px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    border-radius: 20px; 
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05); 
     text-align: center;
 }
 
@@ -80,7 +79,7 @@ header {
 }
 
 .login-card .subtitle {
-    font-size: 15px;
+    font-size: 14px;
     color: #666;
     margin-bottom: 40px;
     font-weight: 500;
@@ -88,4 +87,100 @@ header {
 
 .input-group {
     text-align: left;
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid #e0e0e0; 
+    border-radius: 12px; 
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #a8e0aa;
+    box-shadow: 0 0 0 3px rgba(168, 224, 170, 0.2);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #555;
+    cursor: pointer;
+}
+
+.forgot-pwd {
+    color: #000;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.forgot-pwd:hover {
+    text-decoration: underline;
+    color: #a8e0aa;
+}
+
+.btn-login {
+    width: 100%;
+    background-color: #a8e0aa; 
+    color: #000; 
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px;
+    border: none;
+    border-radius: 12px; 
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    margin-bottom: 25px;
+}
+
+.btn-login:hover {
+    background-color: #8ad38d; 
+    transform: translateY(-2px);
+}
+
+.signup-link {
+    font-size: 14px;
+    color: #666;
+}
+
+.signup-link a {
+    color: #000;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 992px) {
+    .bg-shape {
+        width: 150vw;
+        height: 150vw;
+        top: -30%;
+        left: -25%;
+    }
 }
