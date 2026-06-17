@@ -32,9 +32,9 @@
         <main class="quiz-wrapper">
             <div class="quiz-card" id="quizCard">
                 <h2 id="quizTitle">Loading...</h2>
-                <p class="subtitle">Over the last 2 weeks, how often have you been bothered by any of the following problems?</p>
+                <p class="subtitle" id="quizSubtitle">Loading...</p>
                 
-                <div class="progress-bar">
+                <div class="progress-bar" id="progressBarContainer">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
                 
@@ -47,11 +47,11 @@
 
                 <button class="btn-next" id="btnNext" disabled onclick="nextQuestion()">Next Question</button>
                 
-                <div class="disclaimer" style="margin-top: 35px; padding: 16px 20px; background-color: #fff4f4; border-left: 5px solid #ff4d4f; border-radius: 8px; font-size: 13px; color: #222; text-align: left; line-height: 1.6;">
-                  <strong style="color: #d90000; font-size: 14px;">⚠️ Important Note:</strong> 
-                  All these tools and calculated indices are for screening, informational, and risk estimation purposes only. 
-                  hey <strong style="color: #d90000;">DO NOT</strong> replace professional medical diagnosis. 
-                  Always consult a doctor or healthcare professional for an accurate diagnosis and medical advice.
+                <div class="disclaimer" id="quizDisclaimer" style="margin-top: 35px; padding: 16px 20px; background-color: #fff4f4; border-left: 5px solid #ff4d4f; border-radius: 8px; font-size: 13px; color: #222; text-align: left; line-height: 1.6;">
+                    <strong style="color: #d90000; font-size: 14px;">⚠️ Important Note:</strong> 
+                    All these tools and calculated indices are for screening, informational, and risk estimation purposes only. 
+                    They <strong style="color: #d90000;">DO NOT</strong> replace professional medical diagnosis. 
+                    Always consult a doctor or healthcare professional for an accurate diagnosis and medical advice.
                 </div>
             </div>
 
@@ -84,6 +84,8 @@
 
     <script>
         const questions = [
+            "1. Have you had a medical check-up before?",
+
             "Little interest or pleasure in doing things",
             "Feeling down, depressed, or hopeless",
             "Trouble falling or staying asleep, or sleeping too much",
@@ -94,7 +96,6 @@
             "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual",
             "Thoughts that you would be better off dead or of hurting yourself in some way",
             
-            // GAD-7 Questions (Index 9 - 15)
             "Feeling nervous, anxious, or on edge",
             "Not being able to stop or control worrying",
             "Worrying too much about different things",
@@ -104,7 +105,12 @@
             "Feeling afraid as if something awful might happen"
         ];
 
-        const options = [
+        const yesNoOptions = [
+            { text: "Yes", score: 0 },
+            { text: "No", score: 0 }
+        ];
+
+        const standardOptions = [
             { text: "Not at all", score: 0 },
             { text: "Several days", score: 1 },
             { text: "More than half the days", score: 2 },
@@ -117,38 +123,68 @@
         let selectedValue = null;
 
         const quizTitle = document.getElementById('quizTitle');
+        const quizSubtitle = document.getElementById('quizSubtitle');
         const questionCountDisplay = document.getElementById('questionCountDisplay');
         const questionText = document.getElementById('questionText');
         const optionsContainer = document.getElementById('optionsContainer');
         const btnNext = document.getElementById('btnNext');
         const progressFill = document.getElementById('progressFill');
+        const progressBarContainer = document.getElementById('progressBarContainer');
+        const quizDisclaimer = document.getElementById('quizDisclaimer');
         const quizCard = document.getElementById('quizCard');
         const resultCard = document.getElementById('resultCard');
 
         function loadQuestion() {
-            let currentSection, relativeIndex, sectionTotal;
-
-            if (currentIndex < 9) {
-                quizTitle.innerText = "PHQ-9 (Patient Health Questionnaire-9)";
-                relativeIndex = currentIndex + 1; // Từ 1 đến 9
-                sectionTotal = 9;
-            } else {
-                quizTitle.innerText = "GAD-7 (Generalized Anxiety Disorder-7)";
-                relativeIndex = (currentIndex - 9) + 1; // Từ 1 đến 7
-                sectionTotal = 7;
-            }
-
-            questionCountDisplay.innerHTML = `Question <span id="currentQ">${relativeIndex}</span> of ${sectionTotal}`;
-            
-            progressFill.style.width = ((relativeIndex - 1) / sectionTotal) * 100 + "%";
-            
-            questionText.innerText = relativeIndex + ". " + questions[currentIndex];
-            
             optionsContainer.innerHTML = '';
             selectedValue = null;
             btnNext.disabled = true;
 
-            options.forEach((opt) => {
+            let optionsToRender = standardOptions;
+
+            if (currentIndex === 0) {
+                // --- CÂU HỎI SƠ BỘ (Giống thiết kế trong ảnh) ---
+                quizTitle.innerText = "Mental Health Assessment";
+                quizSubtitle.innerText = "Please answer the following questions to help us understand your current situation.";
+                
+                // Ẩn thanh tiến trình, bộ đếm và lưu ý quan trọng
+                progressBarContainer.style.display = 'none';
+                questionCountDisplay.style.display = 'none';
+                quizDisclaimer.style.display = 'none';
+                
+                questionText.innerText = questions[currentIndex]; // Đã có sẵn số 1.
+                optionsToRender = yesNoOptions;
+                
+            } else if (currentIndex >= 1 && currentIndex <= 9) {
+                // --- PHẦN PHQ-9 ---
+                quizTitle.innerText = "PHQ-9 (Patient Health Questionnaire-9)";
+                quizSubtitle.innerText = "Over the last 2 weeks, how often have you been bothered by any of the following problems?";
+                
+                // Hiện lại các thành phần đã ẩn
+                progressBarContainer.style.display = 'block';
+                questionCountDisplay.style.display = 'block';
+                quizDisclaimer.style.display = 'block';
+
+                let relativeIndex = currentIndex;
+                questionCountDisplay.innerHTML = `Question <span id="currentQ">${relativeIndex}</span> of 9`;
+                progressFill.style.width = ((relativeIndex - 1) / 9) * 100 + "%";
+                questionText.innerText = relativeIndex + ". " + questions[currentIndex];
+                
+            } else {
+                // --- PHẦN GAD-7 ---
+                quizTitle.innerText = "GAD-7 (Generalized Anxiety Disorder-7)";
+                quizSubtitle.innerText = "Over the last 2 weeks, how often have you been bothered by any of the following problems?";
+                
+                progressBarContainer.style.display = 'block';
+                questionCountDisplay.style.display = 'block';
+                quizDisclaimer.style.display = 'block';
+
+                let relativeIndex = (currentIndex - 9);
+                questionCountDisplay.innerHTML = `Question <span id="currentQ">${relativeIndex}</span> of 7`;
+                progressFill.style.width = ((relativeIndex - 1) / 7) * 100 + "%";
+                questionText.innerText = relativeIndex + ". " + questions[currentIndex];
+            }
+
+            optionsToRender.forEach((opt) => {
                 const label = document.createElement('label');
                 label.className = 'option-box';
                 
@@ -171,9 +207,9 @@
 
         function nextQuestion() {
             if (selectedValue !== null) {
-                if (currentIndex < 9) {
+                if (currentIndex >= 1 && currentIndex <= 9) {
                     depressionTotal += selectedValue;
-                } else {
+                } else if (currentIndex >= 10) {
                     anxietyTotal += selectedValue;
                 }
                 
