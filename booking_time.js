@@ -19,36 +19,36 @@ const timeSlots = {
 
 // Function to update the list of times when the user selects a session
 function updateTimeSlots() {
-    const sessionSelect = document.getElementById("session");
+    const sessionSelect = document.getElementById("session"); // id sesson phân biệt ô dropdown vs ô time, hàm get lấy đúng ptu ô đó cất vào biến sessionSelect
     const timeSelect = document.getElementById("time");
-    const selectedSession = sessionSelect.value;
+    const selectedSession = sessionSelect.value; // sessionselect value lưu gtri đã chọn biến selected 
 
     // 1. Clear the currently displayed times, keeping only the "Select Time" option
-    timeSelect.innerHTML = '<option value="" disabled selected>Select Time</option>';
+    timeSelect.innerHTML = '<option value="" disabled selected>Select Time</option>'; 
 
     // 2. If the user selects a valid session present in the data
-    if (selectedSession && timeSlots[selectedSession]) {
+    if (selectedSession && timeSlots[selectedSession]) { //check xem buổi chọn của user và buổi đấy có trong data timeSlots không
         // Get the list of times for that session and create new <option> elements
-        timeSlots[selectedSession].forEach(slot => {
-            const option = document.createElement("option");
+        timeSlots[selectedSession].forEach(slot => { //lặp từng vòng để lấy thời gian ra và tạo option
+            const option = document.createElement("option"); 
             option.value = slot.value;
-            option.textContent = slot.text;
-            timeSelect.appendChild(option);
+            option.textContent = slot.text;// gán text hiển thị cho option
+            timeSelect.appendChild(option);//   thêm option vào dropdown timeSelect để hiển thị cho user chọn
         });
     }
 }
 
 // Function to clear selections when clicking "Clear selection"
 function clearTimeSelection() {
-    document.getElementById('session').selectedIndex = 0;
+    document.getElementById('session').selectedIndex = 0; //vdu chọn afternoon và chọn giờ, sau đó chọn morning thì sẽ clear hết cả 2
     document.getElementById('time').innerHTML = '<option value="" disabled selected>Select Time</option>';
 }
 
 // Listen for the event when the page has finished loading
-window.onload = function() {
+window.onload = function() { //chuyển dữ liệu bookdate từ page 1 sang page 2 và hiển thị
     // --- NEW SECTION: GET THE DATE FROM PAGE 1 AND DISPLAY IT ON THE SCREEN ---
-    const savedDate = localStorage.getItem('bookingDate'); // Get the date from local storage
-    const displayElement = document.getElementById('selectedDateDisplay');
+    const savedDate = localStorage.getItem('bookingDate'); // lấy dữ liệu từ dán vào saved date qua biến localstorage
+    const displayElement = document.getElementById('selectedDateDisplay'); // tìm thẻ hiển thị ngày đã chọn qua id và gán vào biến displayElement
     
     if (savedDate) {
         displayElement.innerText = savedDate; // If there is a date, display it
@@ -58,32 +58,32 @@ window.onload = function() {
     }
 
     // --- OLD SECTION: Listen for changes in the Session dropdown ---
-    const sessionSelect = document.getElementById("session");
+    const sessionSelect = document.getElementById("session"); // Get the Session dropdown element by its ID and store it in a variable
     if (sessionSelect) {
-        sessionSelect.addEventListener('change', updateTimeSlots);
+        sessionSelect.addEventListener('change', updateTimeSlots); // Listen for changes in the Session dropdown and update the Time dropdown accordingly
     }
 };
 
 // Function to save Time and Session before moving to the Success page
-function saveTimeAndContinue(event) {
+function saveTimeAndContinue(event) { //chuyển trang 3 success và lưu  dữ liệu đã
     event.preventDefault(); // Prevent the <a> tag from redirecting immediately
     
-    const sessionSelect = document.getElementById("session");
+    const sessionSelect = document.getElementById("session"); // trích xuất giá trị đã chọn của session và time để lưu vào local storage trước khi chuyển trang
     const timeSelect = document.getElementById("time");
 
     // Check if the user has made a selection
-    if (sessionSelect.selectedIndex === 0 || timeSelect.selectedIndex === 0) {
+    if (sessionSelect.selectedIndex === 0 || timeSelect.selectedIndex === 0) { // check xem chọn đủ ch
         alert("Please select both a Session and a Time before continuing!");
         return;
     }
 
     // Get the text content displayed in the Dropdown (e.g., "08:00 AM - 10:00 AM")
-    const sessionText = sessionSelect.options[sessionSelect.selectedIndex].text;
+    const sessionText = sessionSelect.options[sessionSelect.selectedIndex].text; // tìm buổi đã chọn và lấy text hiển thị của nó để lưu vào local storage, tương tự với time
     const timeText = timeSelect.options[timeSelect.selectedIndex].text;
 
     // Save to local storage
-    localStorage.setItem('bookingSession', sessionText);
-    localStorage.setItem('bookingTime', timeText);
+    localStorage.setItem('bookingSession', sessionText);// lưu session đã chọn vào local storage với key 'bookingSession' và giá trị là text hiển thị của session đã chọn
+    localStorage.setItem('bookingTime', timeText); // giờ vừa dc lưu nhét vào biến local và gọi tên là booking time để máy tìm đúng dữ liệu đã lưu và hiển thị ở trang success
 
     // Start redirecting to the Success page
     window.location.href = "booking_success.html";

@@ -31,13 +31,14 @@
 
         <main class="quiz-wrapper">
             <div class="quiz-card" id="quizCard">
-                <h2>Mental Health Assessment</h2>
-                <p class="subtitle">Please answer the following questions to help us understand your current situation.</p>
+                <h2 id="quizTitle">Loading...</h2>
+                <p class="subtitle">Over the last 2 weeks, how often have you been bothered by any of the following problems?</p>
                 
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
-                <p class="question-count">Question <span id="currentQ">1</span> of 17</p>
+                
+                <p class="question-count" id="questionCountDisplay">Question 1 of 9</p>
 
                 <h3 class="question-text" id="questionText">Loading...</h3>
 
@@ -45,6 +46,13 @@
                     </div>
 
                 <button class="btn-next" id="btnNext" disabled onclick="nextQuestion()">Next Question</button>
+                
+                <div class="disclaimer" style="margin-top: 35px; padding: 16px 20px; background-color: #fff4f4; border-left: 5px solid #ff4d4f; border-radius: 8px; font-size: 13px; color: #222; text-align: left; line-height: 1.6;">
+                  <strong style="color: #d90000; font-size: 14px;">⚠️ Important Note:</strong> 
+                  All these tools and calculated indices are for screening, informational, and risk estimation purposes only. 
+                  hey <strong style="color: #d90000;">DO NOT</strong> replace professional medical diagnosis. 
+                  Always consult a doctor or healthcare professional for an accurate diagnosis and medical advice.
+                </div>
             </div>
 
             <div class="quiz-card" id="resultCard" style="display: none;">
@@ -75,40 +83,32 @@
     </div>
 
     <script>
-        const yesNoOptions = [
-            { text: "Yes", score: 0 }, 
-            { text: "No", score: 0 }
+        const questions = [
+            "Little interest or pleasure in doing things",
+            "Feeling down, depressed, or hopeless",
+            "Trouble falling or staying asleep, or sleeping too much",
+            "Feeling tired or having little energy",
+            "Poor appetite or overeating",
+            "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
+            "Trouble concentrating on things, such as reading the newspaper or watching television",
+            "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual",
+            "Thoughts that you would be better off dead or of hurting yourself in some way",
+            
+            // GAD-7 Questions (Index 9 - 15)
+            "Feeling nervous, anxious, or on edge",
+            "Not being able to stop or control worrying",
+            "Worrying too much about different things",
+            "Trouble relaxing",
+            "Being so restless that it is hard to sit still",
+            "Becoming easily annoyed or irritable",
+            "Feeling afraid as if something awful might happen"
         ];
 
-        const standardOptions = [
+        const options = [
             { text: "Not at all", score: 0 },
             { text: "Several days", score: 1 },
             { text: "More than half the days", score: 2 },
             { text: "Nearly every day", score: 3 }
-        ];
-
-        const questions = [
-            { text: "Have you had a medical check-up before?", options: yesNoOptions, type: "general" },
-            
-            // 9 questions PHQ-9 (Depression)
-            { text: "Little interest or pleasure in doing things", options: standardOptions, type: "depression" },
-            { text: "Feeling down, depressed, or hopeless", options: standardOptions, type: "depression" },
-            { text: "Trouble falling or staying asleep, or sleeping too much", options: standardOptions, type: "depression" },
-            { text: "Feeling tired or having little energy", options: standardOptions, type: "depression" },
-            { text: "Poor appetite or overeating", options: standardOptions, type: "depression" },
-            { text: "Feeling bad about yourself — or that you are a failure or have let yourself or your family down", options: standardOptions, type: "depression" },
-            { text: "Trouble concentrating on things, such as reading the newspaper or watching television", options: standardOptions, type: "depression" },
-            { text: "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual", options: standardOptions, type: "depression" },
-            { text: "Thoughts that you would be better off dead or of hurting yourself in some way", options: standardOptions, type: "depression" },
-            
-            // 7 questions GAD-7 (Anxiety)
-            { text: "Feeling nervous, anxious, or on edge", options: standardOptions, type: "anxiety" },
-            { text: "Not being able to stop or control worrying", options: standardOptions, type: "anxiety" },
-            { text: "Worrying too much about different things", options: standardOptions, type: "anxiety" },
-            { text: "Trouble relaxing", options: standardOptions, type: "anxiety" },
-            { text: "Being so restless that it is hard to sit still", options: standardOptions, type: "anxiety" },
-            { text: "Becoming easily annoyed or irritable", options: standardOptions, type: "anxiety" },
-            { text: "Feeling afraid as if something awful might happen", options: standardOptions, type: "anxiety" }
         ];
 
         let currentIndex = 0;
@@ -116,28 +116,39 @@
         let anxietyTotal = 0;    
         let selectedValue = null;
 
+        const quizTitle = document.getElementById('quizTitle');
+        const questionCountDisplay = document.getElementById('questionCountDisplay');
         const questionText = document.getElementById('questionText');
         const optionsContainer = document.getElementById('optionsContainer');
-        const currentQ = document.getElementById('currentQ');
         const btnNext = document.getElementById('btnNext');
         const progressFill = document.getElementById('progressFill');
         const quizCard = document.getElementById('quizCard');
         const resultCard = document.getElementById('resultCard');
 
         function loadQuestion() {
-            let currentData = questions[currentIndex];
+            let currentSection, relativeIndex, sectionTotal;
 
-            currentQ.innerText = currentIndex + 1;
-            document.querySelector('.question-count').innerHTML = `Question <span id="currentQ">${currentIndex + 1}</span> of ${questions.length}`;
-            progressFill.style.width = ((currentIndex) / questions.length) * 100 + "%";
+            if (currentIndex < 9) {
+                quizTitle.innerText = "PHQ-9 (Patient Health Questionnaire-9)";
+                relativeIndex = currentIndex + 1; // Từ 1 đến 9
+                sectionTotal = 9;
+            } else {
+                quizTitle.innerText = "GAD-7 (Generalized Anxiety Disorder-7)";
+                relativeIndex = (currentIndex - 9) + 1; // Từ 1 đến 7
+                sectionTotal = 7;
+            }
+
+            questionCountDisplay.innerHTML = `Question <span id="currentQ">${relativeIndex}</span> of ${sectionTotal}`;
             
-            questionText.innerText = (currentIndex + 1) + ". " + currentData.text;
+            progressFill.style.width = ((relativeIndex - 1) / sectionTotal) * 100 + "%";
+            
+            questionText.innerText = relativeIndex + ". " + questions[currentIndex];
             
             optionsContainer.innerHTML = '';
             selectedValue = null;
             btnNext.disabled = true;
 
-            currentData.options.forEach((opt) => {
+            options.forEach((opt) => {
                 const label = document.createElement('label');
                 label.className = 'option-box';
                 
@@ -152,7 +163,7 @@
 
         function selectOption(score, inputElement) {
             selectedValue = score;
-            btnNext.disabled = false;
+            btnNext.disabled = false; 
 
             document.querySelectorAll('.option-box').forEach(box => box.classList.remove('selected'));
             inputElement.parentElement.classList.add('selected');
@@ -160,11 +171,9 @@
 
         function nextQuestion() {
             if (selectedValue !== null) {
-                
-                let qType = questions[currentIndex].type;
-                if (qType === "depression") {
+                if (currentIndex < 9) {
                     depressionTotal += selectedValue;
-                } else if (qType === "anxiety") {
+                } else {
                     anxietyTotal += selectedValue;
                 }
                 
